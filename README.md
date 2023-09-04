@@ -1,7 +1,7 @@
 # dotfiles
 
 /.local/bin/tmux-sessionizer
-'''
+```
 #!/usr/bin/env bash
 
 if [[ $# -eq 1 ]]; then
@@ -27,4 +27,21 @@ if ! tmux has-session -t=$selected_name 2> /dev/null; then
 fi
 
 tmux switch-client -t $selected_name
-'''
+```
+/.local/bin/tmux-cht.sh
+```
+#!/usr/bin/env bash
+selected=`cat ~/.config/tmux/tmux-cht-languages ~/.config/tmux/tmux-cht-command | fzf`
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+read -p "Enter Query: " query
+
+if grep -qs "$selected" ~/.config/tmux/tmux-cht-languages; then
+    query=`echo $query | tr ' ' '+'`
+    tmux neww bash -c "echo \"curl cht.sh/$selected/$query/\" & curl cht.sh/$selected/$query & while [ : ]; do sleep 1; done"
+else
+    tmux neww bash -c "curl -s cht.sh/$selected~$query | less"
+fi
+```
