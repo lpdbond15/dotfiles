@@ -15,8 +15,8 @@ end
 
 config.colors = {}
 config.colors.background = '#111111'
-config.font_size = 16
-config.color_scheme = 'Catppuccin Frappe'
+config.font_size = 16.0
+config.color_scheme = 'Tokyo Night'
 config.window_background_opacity = 0.8
 config.enable_tab_bar = false
 config.use_fancy_tab_bar = false
